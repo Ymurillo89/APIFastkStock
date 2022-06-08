@@ -1,3 +1,4 @@
+using APIFastkStock.Models.Interfaz;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,9 +36,12 @@ namespace APIFastkStock
 
             services.AddDbContext<Context.AppContext>(options =>
             options.UseSqlServer(
-            Configuration.GetConnectionString("Dedalo2008")));
+            Configuration.GetConnectionString("ConexionSQL")));
+
+            services.AddScoped<IDapperConsultasDB, Service.DapperConsultaDB>();
 
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIFastkStock", Version = "v1" });
